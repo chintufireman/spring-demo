@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	
+	<context:property-placeholder location ="bus.properties"/>
+	<bean id="myVehicle" class="com.demo.vehicles.Bus">
+<!-- 		<constructor-arg ref="myDiscountService" /> -->
+		<property name="discountService" ref ="myDiscountService" />
+		<property name="brandName" value="volvo" />
+<!-- 		<property name="maxPrice" value="200000.00" /> -->
+		<property name="maxPrice" value="${bus.mrp}" />
+	</bean>
+	<!-- 1. whatever type of bean u have to inject or how the 
+	Vehicle's object will be configured is given in the class name
+	
+	2. like if u want to provide behaviour at runntime of Vehicle
+	suppose bus then give Bus class -->
+	
+	<bean id="myDiscountService" class="com.demo.vehicles.FestivalDiscountService">
+		<!-- now we have to pass this bean in above bean of bus as 
+		we are using this bean or class or object in above class
+		of bus. by using constructor injection -->
+	</bean>
+	
+<!-- 	3. remember u cannot provide interface name because these 
+	services are not implemented u have to provide implementation
+	classes inside the bean so that u can config behaviour of
+	discountservice class.
+	
+		4. now in simple terms this bean will create object of 
+		festivaldiscountservice at runntime 
+		
+		5. now as u know u are using the discountservice interface
+		inside the bus and car.
+		
+		6. understand the flow inside the bus class u have to 
+		use reference variable of DiscountService interface
+		so that u can access its method getDiscount() so for
+		that u have initialized its variable by creating Object
+		of its implementation class
+		
+		7. whose object using spring we will create at runtime
+		by configuring xml file and defining bean inside it.
+		
+		8. but we have to throw this reference variable inside 
+		the Bus class which we haven't done
+		
+		9. and there are 3 ways to do it
+			a) constructor injection
+			b) setter injection
+			c) property injection
+	-->
+</beans>
