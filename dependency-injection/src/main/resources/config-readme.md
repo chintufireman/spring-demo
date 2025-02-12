@@ -36,3 +36,8 @@
 create any key value pair like bus.mrp=2000 doesnt matter.
 
 4. now just import that property file in xml and after same tag but instead of providing raw manual value do ${bus.mrp}
+
+### how to change scopes of bean?
+1. inside bean tag use scope attribute and change the scope of bean by mentioning it as a value
+
+2. by default it is singleton

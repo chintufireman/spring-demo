@@ -21,7 +21,7 @@ public class Bus implements Vehicle{
 	public Bus() {
 		
 	}
-
+	
 	public void setDiscountService(DiscountService discountService) {
 		this.discountService = discountService;
 	}
