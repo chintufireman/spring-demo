@@ -27,3 +27,7 @@ public Car(@Qualifier("noDiscountServiceImpl") DiscountService discountService) 
 1. it is used for property injection from property file.
 2. we first pass the location of property file its name inside the xml file context:property-placeholder tag.
 3. and simply use the @value annotation on variable where u want to inject property from file and with same syntax used in xml to inject property inside @Value("${car.mrp}") pass name of property
+
+### scope annotation
+1. using @Scope above class and pass the name of scope as parameter 
+

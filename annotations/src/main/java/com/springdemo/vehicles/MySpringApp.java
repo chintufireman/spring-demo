@@ -13,5 +13,8 @@ public class MySpringApp {
 		
 		System.out.println(bean.getDiscountMessage());
 		System.out.println(bean.getMrp());
+		
+		Car bean2 = applicationContext.getBean("car",Car.class);
+		System.out.println(bean==bean2);
 	}
 }

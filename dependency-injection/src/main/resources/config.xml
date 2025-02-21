@@ -12,7 +12,7 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	
 	<context:property-placeholder location ="bus.properties"/>
-	<bean id="myVehicle" class="com.demo.vehicles.Bus">
+	<bean id="myVehicle" class="com.demo.vehicles.Bus" scope="singleton">
 <!-- 		<constructor-arg ref="myDiscountService" /> -->
 		<property name="discountService" ref ="myDiscountService" />
 		<property name="brandName" value="volvo" />
