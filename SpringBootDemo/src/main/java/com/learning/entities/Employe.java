@@ -10,6 +10,10 @@ import jakarta.persistence.Table;
 @Table(name = "Employees")
 public class Employe {
 
+	@Override
+	public String toString() {
+		return "Employe [id=" + id + ", name=" + name + ", salary=" + salary + "]";
+	}
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;

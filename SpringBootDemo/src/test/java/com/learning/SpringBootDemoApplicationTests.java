@@ -1,13 +1,11 @@
 package com.learning;
 
-import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import com.learning.entities.Employe;
+import com.learning.services.EmployeService;
 
 @SpringBootTest
 class SpringBootDemoApplicationTests {
-
-	@Test
-	void contextLoads() {
-	}
 
 }

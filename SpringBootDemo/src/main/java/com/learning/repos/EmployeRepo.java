@@ -7,5 +7,6 @@ import com.learning.entities.Employe;
 
 @Repository
 public interface EmployeRepo extends JpaRepository<Employe, Integer>{
-
+	
+	public Employe findByName(String name);
 }

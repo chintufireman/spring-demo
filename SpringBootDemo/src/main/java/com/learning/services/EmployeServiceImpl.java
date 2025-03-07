@@ -16,40 +16,41 @@ public class EmployeServiceImpl implements EmployeService {
 
 	@Autowired
 	private EmployeRepo employeRepo;
-	
+
 	@Transactional
 	@Override
 	public Employe saveEmploye(Employe employe) {
 		Employe save = employeRepo.save(employe);
-		System.out.println(save.toString());
-		return save;
+		Employe validateEmpIfPresent = validateEmpIfPresent(save);
+		if(validateEmpIfPresent == null) {
+			throw new RuntimeException("Empty employee passed");
+		}
+//		System.out.println(save.toString());
+		return validateEmpIfPresent;
 	}
 
 	@Override
 	public Employe getEmployee(int id) throws ResourceNotFoundException {
 		Employe employe = null;
-		
-			 employe= employeRepo
-					.findById(id)
-					.orElseThrow(() -> new ResourceNotFoundException("No Such Element found with id "+id));
-		
+
+		employe = employeRepo.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("No Such Element found with id " + id));
+
 		return employe;
 	}
 
 	@Override
 	public Employe updateEmploye(Employe employe, int id) {
-		
+
 		Employe oldEmp = null;
 		try {
-			oldEmp = employeRepo
-					.findById(id)
-					.orElseThrow(() -> new ResourceNotFoundException("No such employee with id "+id));
+			oldEmp = employeRepo.findById(id)
+					.orElseThrow(() -> new ResourceNotFoundException("No such employee with id " + id));
 			oldEmp.setName(employe.getName());
 			oldEmp.setSalary(employe.getSalary());
-			
+
 			oldEmp = employeRepo.save(oldEmp);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return oldEmp;
@@ -57,19 +58,17 @@ public class EmployeServiceImpl implements EmployeService {
 
 	@Override
 	public void deleteEmploye(int id) {
-		try {
-			employeRepo
-			.findById(id)
-			.orElseThrow(() -> new ResourceNotFoundException("No such employee found with id "+id));
-		}
-		catch (ResourceNotFoundException e) {
-			e.printStackTrace();
-		}
+
+		employeRepo.deleteById(id);
+
 	}
 
 	@Override
 	public List<Employe> getAllEmployes() {
 		return employeRepo.findAll();
 	}
-
+	
+	private Employe validateEmpIfPresent(Employe name) {
+		return (name!=null)? name :null;
+	}
 }
