@@ -3,6 +3,9 @@ package com.learning.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.learning.entities.Employe;
@@ -29,6 +32,7 @@ public class EmployeServiceImpl implements EmployeService {
 		return validateEmpIfPresent;
 	}
 
+	@Cacheable(value="employee", key="#id")
 	@Override
 	public Employe getEmployee(int id) throws ResourceNotFoundException {
 		Employe employe = null;
@@ -39,6 +43,7 @@ public class EmployeServiceImpl implements EmployeService {
 		return employe;
 	}
 
+	@CachePut(value="employee",key = "#id")
 	@Override
 	public Employe updateEmploye(Employe employe, int id) {
 
@@ -56,6 +61,7 @@ public class EmployeServiceImpl implements EmployeService {
 		return oldEmp;
 	}
 
+	@CacheEvict(value="employee",key = "#id")
 	@Override
 	public void deleteEmploye(int id) {
 
