@@ -2,6 +2,9 @@ package com.learning.services;
 
 import java.util.List;
 
+import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -20,6 +23,11 @@ public class EmployeServiceImpl implements EmployeService {
 	@Autowired
 	private EmployeRepo employeRepo;
 
+	private static final Logger logger = 
+			LoggerFactory
+			.getLogger(EmployeServiceImpl.class);
+	
+	
 	@Transactional
 	@Override
 	public Employe saveEmploye(Employe employe) {
@@ -71,6 +79,7 @@ public class EmployeServiceImpl implements EmployeService {
 
 	@Override
 	public List<Employe> getAllEmployes() {
+		logger.info("Getting all employees");
 		return employeRepo.findAll();
 	}
 	

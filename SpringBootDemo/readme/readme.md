@@ -4,4 +4,6 @@
 3. JUNIT
 4. Interceptors
 5. Spring boot caching
-6. 
+6. Actuators
+7. ConditionalOnProperty annotation
+8. logging
