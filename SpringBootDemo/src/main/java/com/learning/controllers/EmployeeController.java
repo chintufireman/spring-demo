@@ -36,6 +36,12 @@ public class EmployeeController {
 		return new ResponseEntity<Employe>(saveEmploye, HttpStatus.CREATED);
 	}
 
+	@GetMapping("/partial")
+	public ResponseEntity<List<Employe>> getEmpByPartialName(@RequestParam String name) {
+		List<Employe> list = employeService.getEmpByPartialName(name);
+		return new ResponseEntity<List<Employe>>(list, HttpStatus.OK);
+	}
+	
 	@GetMapping
 	public ResponseEntity<List<Employe>> getAll() {
 		List<Employe> allEmployes = employeService.getAllEmployes();
@@ -64,4 +70,6 @@ public class EmployeeController {
 		String data = cacheService.printCacheContent(cacheName);
 		return new ResponseEntity<String>(data, HttpStatus.OK);
 	}
+	
+	
 }

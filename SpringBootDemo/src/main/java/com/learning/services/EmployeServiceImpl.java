@@ -86,4 +86,11 @@ public class EmployeServiceImpl implements EmployeService {
 	private Employe validateEmpIfPresent(Employe name) {
 		return (name!=null)? name :null;
 	}
+
+	@Override
+	public List<Employe> getEmpByPartialName(String name) {		
+		return employeRepo.findEmployeByPartialName(name);
+	}
+	
+	
 }

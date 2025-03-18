@@ -12,4 +12,6 @@ public interface EmployeService {
 	public Employe updateEmploye(Employe employe, int id);
 	public void deleteEmploye(int id);
 	public List<Employe> getAllEmployes();
+	
+	public List<Employe> getEmpByPartialName(String name);
 }
