@@ -7,3 +7,4 @@
 6. Actuators
 7. ConditionalOnProperty annotation
 8. logging
+9. spring data jpa

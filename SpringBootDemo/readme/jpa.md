@@ -69,4 +69,6 @@
 
 ### Query annotation
 
-1. is used to create custom queries 
+1. is used to create custom queries like this 
+`@Query("select e from Employe e where e.name LIKE %:name%")public List<Employe> findEmployeByPartialName(@Para("name") String name);`
+
