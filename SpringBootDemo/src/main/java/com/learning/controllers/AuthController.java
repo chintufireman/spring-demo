@@ -1,5 +1,7 @@
 package com.learning.controllers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,10 +36,11 @@ public class AuthController {
 	@Autowired
 	private EmployeServiceImpl serviceImpl;
 	
-	
+	private Logger logger = LoggerFactory.getLogger(AuthController.class);
 	
 	@PostMapping("/login")
 	public ResponseEntity<JwtResponse> login(@RequestBody AuthRequest authRequest){
+		logger.info("Inside login ");
 		authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
 		String token = jwtUtils.generateToken(authRequest.getUsername(), true);
 		String refreshToken = jwtUtils.generateToken(authRequest.getUsername(), false);

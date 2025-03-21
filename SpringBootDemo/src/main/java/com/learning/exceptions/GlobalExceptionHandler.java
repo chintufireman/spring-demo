@@ -36,6 +36,7 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<Map<String,String>> 
 	handleJwtException(JwtException ex){
 		HashMap<String, String> response = new HashMap<>();
+		response.put("error_stack", ex.getMessage());
 		response.put("Error:","Invalid Jwt token");
 		return new 
 				ResponseEntity<Map<String,String>>(response,HttpStatus.UNAUTHORIZED);

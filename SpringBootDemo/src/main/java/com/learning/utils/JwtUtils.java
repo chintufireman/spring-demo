@@ -12,7 +12,7 @@ import io.jsonwebtoken.security.Keys;
 @Component
 public class JwtUtils {
 
-	final static private String secret_key="harshwardhan";
+	final static private String secret_key="harshwardhanadwar3453raedas654sdfgsdawdw(das";
 	final static private long access_token_expiration_time=15*60*1000;
 	final static private long refresh_token_expiration=24*60*60*1000;
 	
