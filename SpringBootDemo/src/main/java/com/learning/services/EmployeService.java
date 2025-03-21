@@ -2,6 +2,10 @@ package com.learning.services;
 
 import java.util.List;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import com.learning.entities.Employe;
 import com.learning.exceptions.ResourceNotFoundException;
 

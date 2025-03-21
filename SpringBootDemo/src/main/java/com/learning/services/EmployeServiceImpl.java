@@ -9,6 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.learning.entities.Employe;
@@ -18,11 +22,14 @@ import com.learning.repos.EmployeRepo;
 import jakarta.transaction.Transactional;
 
 @Service
-public class EmployeServiceImpl implements EmployeService {
+public class EmployeServiceImpl implements EmployeService, UserDetailsService {
 
 	@Autowired
 	private EmployeRepo employeRepo;
 
+	@Autowired
+	PasswordEncoder passwordEncoder;
+	
 	private static final Logger logger = 
 			LoggerFactory
 			.getLogger(EmployeServiceImpl.class);
@@ -31,6 +38,7 @@ public class EmployeServiceImpl implements EmployeService {
 	@Transactional
 	@Override
 	public Employe saveEmploye(Employe employe) {
+		employe.setPassword(passwordEncoder.encode(employe.getPassword()));
 		Employe save = employeRepo.save(employe);
 		Employe validateEmpIfPresent = validateEmpIfPresent(save);
 		if(validateEmpIfPresent == null) {
@@ -91,6 +99,15 @@ public class EmployeServiceImpl implements EmployeService {
 	public List<Employe> getEmpByPartialName(String name) {		
 		return employeRepo.findEmployeByPartialName(name);
 	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		List<Employe> findByName = employeRepo.findByName(username);
+		CustomUserDetail customUserDetail = new CustomUserDetail(findByName.get(0));
+		return customUserDetail;
+	}
 	
-	
+	public Employe loadEmployeByName(String name) {
+		return employeRepo.findByName(name).get(0);
+	}
 }
