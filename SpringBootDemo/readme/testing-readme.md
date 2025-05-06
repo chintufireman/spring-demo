@@ -30,7 +30,7 @@ which is nothing but a function or way to tell mockito what to do when some func
 ### Mocking void methods by using doNothing() and verify()
 1. lets suppose u have service that does not return anything so how will u know if the test case is executed successfully 
 
-2. u use `Mockito.verify(employeRepo,times(1)).deleteById(1);` to verify if this method is called 1 time. 2nd parameter of verify takes verification mode or how many times method invocation should be cheked in above case one
+2. u use `Mockito.verify(employeRepo.times(1)).deleteById(1);` to verify if this method is called 1 time. 2nd parameter of verify takes verification mode or how many times method invocation should be checked in above case one
 
 3. after that we mentioned which method needs to be checked for invocation.
 
